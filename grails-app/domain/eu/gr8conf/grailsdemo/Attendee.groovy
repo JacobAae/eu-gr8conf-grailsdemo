@@ -9,9 +9,17 @@ class Attendee {
     Date dateCreated
     Date lastUpdated
 
+    static hasMany = [talks: Talk]
+
     static constraints = {
         name blank: false
         email blank: false, unique: true, email: true
         nationality nullable: true
     }
+
+    @Override
+    String toString() {
+        name
+    }
+
 }
