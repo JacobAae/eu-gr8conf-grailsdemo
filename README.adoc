@@ -1,0 +1,4 @@
+= Grails 3.0.1 Demo for Beginners Workshop
+
+Made for GR8conf EU 2015
+
