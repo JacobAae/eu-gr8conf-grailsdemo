@@ -6,7 +6,8 @@ Made for GR8conf EU 2015
 
 In this second part, the task is to make the following:
 
-* Make a new show/display attendee action and view, that can show the talks attended
+* Make a new show/display attendee action in the AttendeeController
+* Make a corresponding view, that can show the talks attended
 * Cleanup the Attendee controller and place logic in a transactional service
 
 
