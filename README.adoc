@@ -2,3 +2,27 @@
 
 Made for GR8conf EU 2015
 
+== Tasks
+
+In this first part, the task is to make the following:
+
+* The Attendee domain class
+** Add the properties and constraints
+** Test the constraints
+* generate scaffolded views and a controller
+
+
+== Hints and pointers
+
+* The slides for the workshop describes this
+* http://grails.github.io/grails-doc/3.0.1/guide/gettingStarted.html#aHelloWorldExample
+
+== Next step
+
+When you are done, or if you need to skip ahead, you can checkout the next step
+
+----
+git checkout 02-first-domain-class
+----
+
+Which contains one solution for this section - and we will use this for the next part
