@@ -17,6 +17,12 @@ class AttendeeController {
         respond attendee
     }
 
+    def display(Long id) {
+        Attendee attendee = Attendee.get(id)
+        respond attendee
+    }
+
+
     def create() {
         respond new Attendee(params)
     }
