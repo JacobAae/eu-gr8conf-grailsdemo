@@ -1,4 +1,18 @@
 = Grails 3.0.1 Demo for Beginners Workshop
 
-Made for GR8conf EU 2015
+Made for GR8conf EU 2015.
 
+This branch contains a clean newly created Grails 3.0.1 project.
+
+
+== About this workshop
+
+There are separate branches for the steps in the workshop, and in the readme file, the task for each part is outlined.
+
+The task for this is simply to checkout the first branch, so you are ready to start working.
+
+Hint: You can do this from the command line with
+
+----
+git checkout 01-application-created
+----
