@@ -20,7 +20,14 @@
             <div class="message" role="status">${flash.message}</div>
             </g:if>
             <f:display bean="talk" />
-            </ol>
+
+	        <ol class="property-list talk">
+		        <li class="fieldcontain">
+			        <span id="average-label" class="property-label">Average rating</span>
+			        <span class="property-value" aria-labelledby="average-label"><g:showRating talk="${talk}"/></span>
+		        </li>
+	        </ol>
+
             <g:form resource="${talk}" method="DELETE">
                 <fieldset class="buttons">
                     <g:link class="edit" action="edit" resource="${talk}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

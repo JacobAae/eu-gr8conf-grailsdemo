@@ -28,4 +28,5 @@ class AttendeeService {
         attendee.delete flush:true
         return new Result(status: Status.OK, item: attendee.id)
     }
+
 }
