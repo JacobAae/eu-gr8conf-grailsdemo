@@ -4,8 +4,12 @@ import grails.test.mixin.*
 import spock.lang.*
 
 @TestFor(AttendeeController)
-@Mock(Attendee)
+@Mock([Attendee,Talk])
 class AttendeeControllerSpec extends Specification {
+
+    def setup() {
+        controller.attendeeService = Mock(AttendeeService)
+    }
 
     def populateValidParams(params) {
         assert params != null
@@ -32,7 +36,6 @@ class AttendeeControllerSpec extends Specification {
     }
 
     void "Test the save action correctly persists an instance"() {
-
         when:"The save action is executed with an invalid instance"
             request.contentType = FORM_CONTENT_TYPE
             request.method = 'POST'
@@ -41,7 +44,8 @@ class AttendeeControllerSpec extends Specification {
             controller.save(attendee)
 
         then:"The create view is rendered again with the correct model"
-            model.attendee!= null
+            1 * controller.attendeeService.saveAttendee(_) >> new Result(status: Status.HAS_ERRORS, item: new Attendee())
+        model.attendee!= null
             view == 'create'
 
         when:"The save action is executed with a valid instance"
@@ -52,6 +56,7 @@ class AttendeeControllerSpec extends Specification {
             controller.save(attendee)
 
         then:"A redirect is issued to the show action"
+            1 * controller.attendeeService.saveAttendee(_) >> { Attendee a -> a.save(); new Result(status: Status.OK, item: a) }
             response.redirectedUrl == '/attendee/show/1'
             controller.flash.message != null
             Attendee.count() == 1
@@ -96,6 +101,7 @@ class AttendeeControllerSpec extends Specification {
             controller.update(null)
 
         then:"A 404 error is returned"
+            1 * controller.attendeeService.saveAttendee(_) >> { new Result(status: Status.NOT_FOUND) }
             response.redirectedUrl == '/attendee/index'
             flash.message != null
 
@@ -106,6 +112,7 @@ class AttendeeControllerSpec extends Specification {
             controller.update(attendee)
 
         then:"The edit view is rendered again with the invalid instance"
+            1 * controller.attendeeService.saveAttendee(_) >> { Attendee a -> a.validate(); new Result(status: Status.HAS_ERRORS, item: a) }
             view == 'edit'
             model.attendee == attendee
 
@@ -116,6 +123,7 @@ class AttendeeControllerSpec extends Specification {
             controller.update(attendee)
 
         then:"A redirect is issued to the show action"
+            1 * controller.attendeeService.saveAttendee(_) >> { Attendee a -> a.save(); new Result(status: Status.OK, item: a) }
             attendee != null
             response.redirectedUrl == "/attendee/show/$attendee.id"
             flash.message != null
@@ -128,6 +136,7 @@ class AttendeeControllerSpec extends Specification {
             controller.delete(null)
 
         then:"A 404 is returned"
+            1 * controller.attendeeService.deleteAttendee(_) >> { new Result(status: Status.NOT_FOUND) }
             response.redirectedUrl == '/attendee/index'
             flash.message != null
 
@@ -143,6 +152,7 @@ class AttendeeControllerSpec extends Specification {
             controller.delete(attendee)
 
         then:"The instance is deleted"
+        1 * controller.attendeeService.deleteAttendee(_) >> { Attendee a -> a.delete(flush:true); new Result(status: Status.OK) }
             Attendee.count() == 0
             response.redirectedUrl == '/attendee/index'
             flash.message != null

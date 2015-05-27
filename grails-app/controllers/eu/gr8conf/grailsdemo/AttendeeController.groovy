@@ -1,11 +1,10 @@
 package eu.gr8conf.grailsdemo
 
 import static org.springframework.http.HttpStatus.*
-import grails.transaction.Transactional
 
-@Transactional(readOnly = true)
 class AttendeeController {
 
+    AttendeeService attendeeService
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
@@ -27,28 +26,25 @@ class AttendeeController {
         respond new Attendee(params)
     }
 
-    @Transactional
     def save(Attendee attendee) {
-        if (attendee == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        if (attendee.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond attendee.errors, view:'create'
-            return
-        }
-
-        attendee.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'attendee.label', default: 'Attendee'), attendee.id])
-                redirect attendee
-            }
-            '*' { respond attendee, [status: CREATED] }
+        Result result = attendeeService.saveAttendee(attendee)
+        switch( result.status) {
+            case Status.NOT_FOUND:
+                notFound()
+                break
+            case Status.HAS_ERRORS:
+                respond result.item.errors, view:'create'
+                break
+            case Status.OK:
+                request.withFormat {
+                    form multipartForm {
+                        flash.message = message(code: 'default.created.message', args: [message(code: 'attendee.label', default: 'Attendee'), attendee.id])
+                        println attendee.dump()
+                        redirect attendee
+                    }
+                    '*' { respond attendee, [status: CREATED] }
+                }
+                break
         }
     }
 
@@ -56,48 +52,43 @@ class AttendeeController {
         respond attendee
     }
 
-    @Transactional
     def update(Attendee attendee) {
-        if (attendee == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
+        Result result = attendeeService.saveAttendee(attendee)
+        switch( result.status) {
+            case Status.NOT_FOUND:
+                notFound()
+                break
+            case Status.HAS_ERRORS:
+                respond result.item.errors, view:'edit'
+                break
+            case Status.OK:
+                request.withFormat {
+                    form multipartForm {
+                        flash.message = message(code: 'default.updated.message', args: [message(code: 'attendee.label', default: 'Attendee'), result.item.id])
+                        redirect result.item
+                    }
+                    '*'{ respond result.item, [status: OK] }
+                }
+                break
         }
 
-        if (attendee.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond attendee.errors, view:'edit'
-            return
-        }
-
-        attendee.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'attendee.label', default: 'Attendee'), attendee.id])
-                redirect attendee
-            }
-            '*'{ respond attendee, [status: OK] }
-        }
     }
 
-    @Transactional
     def delete(Attendee attendee) {
-
-        if (attendee == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        attendee.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'attendee.label', default: 'Attendee'), attendee.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
+        Result result = attendeeService.deleteAttendee(attendee)
+        switch( result.status) {
+            case Status.NOT_FOUND:
+                notFound()
+                break
+            case Status.OK:
+                request.withFormat {
+                    form multipartForm {
+                        flash.message = message(code: 'default.deleted.message', args: [message(code: 'attendee.label', default: 'Attendee'), result.item])
+                        redirect action:"index", method:"GET"
+                    }
+                    '*'{ render status: NO_CONTENT }
+                }
+                break
         }
     }
 
