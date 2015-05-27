@@ -2,3 +2,26 @@
 
 Made for GR8conf EU 2015
 
+== Tasks
+
+In this second part, the task is to make the following:
+
+* Create Domain classes for Talks and Ratings
+** Add the properties and constraints
+* generate scaffolded views and controllers
+* Add some data in the Bootstrap
+
+== Hints and pointers
+
+* The slides for the workshop
+* http://grails.github.io/grails-doc/3.0.1/guide/conf.html
+
+== Next step
+
+When you are done, or if you need to skip ahead, you can checkout the next step
+
+----
+git checkout 03-more-domain-classes
+----
+
+Which contains one solution for this section - and we will use this for the next part
