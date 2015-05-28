@@ -4,24 +4,20 @@ Made for GR8conf EU 2015
 
 == Tasks
 
-In this part, the task is to make the following:
+This is where the specified tasks fr the workshop ends, and you will have to do the continued work on your own!
 
-* Style a few components with css
-* Add a bit of javascript
-* Get familiar with the asset pipeline plugin series
+What you could start with are
+
+* Clean up the remaining controllers from transactional stuff -> services
+* Fix the issues you have encountered with the default views (displaying collections/relations)
+* Study `views/layouts/main.gsp` and change the top bar on all pages
+* Study the datasource section in `conf/application.yml` and make the data persistent over restarts
 
 == Hints and pointers
 
 * The slides for the workshop
-* http://grails.github.io/grails-doc/3.0.1/guide/theWebLayer.html#resources
-* http://grails.org/plugin/asset-pipeline
+* http://grails.github.io/grails-doc/3.0.1/guide/
 
 == Next step
 
-When you are done, or if you need to skip ahead, you can checkout the next step
-
-----
-git checkout 06-styling
-----
-
-Which contains one solution for this section - and we will use this for the next part
+When you are done, you have completed this very brief Grails Introduction - and will be a better man :)
