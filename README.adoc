@@ -6,9 +6,10 @@ Made for GR8conf EU 2015
 
 In this part, the task is to make the following:
 
-* Style a few components with css
-* Add a bit of javascript
 * Get familiar with the asset pipeline plugin series
+* Add Twitter Bootstrap files to the project
+* Style a few components with css
+
 
 == Hints and pointers
 
@@ -18,10 +19,10 @@ In this part, the task is to make the following:
 
 == Next step
 
-When you are done, or if you need to skip ahead, you can checkout the next step
+When you are done, or if you need to skip ahead, you can checkout the result at
 
 ----
 git checkout 06-styling
 ----
 
-Which contains one solution for this section - and we will use this for the next part
+Which contains one solution for this section, and suggestions for further tasks
