@@ -12,6 +12,10 @@ class AttendeeController {
         respond Attendee.list(params), model:[attendeeCount: Attendee.count()]
     }
 
+    def list() {
+        respond Attendee.list(), model:[attendeeCount: Attendee.count()]
+    }
+
     def show(Attendee attendee) {
         respond attendee
     }
