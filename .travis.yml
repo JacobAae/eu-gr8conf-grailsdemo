@@ -1,0 +1,11 @@
+language: groovy
+jdk:
+  - oraclejdk7
+branches:
+  only:
+    - geb-talk
+script:
+  ./gradlew test
+cache:
+  directories:
+  - $HOME/.m2
