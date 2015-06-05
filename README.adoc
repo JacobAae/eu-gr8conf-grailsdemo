@@ -1,6 +1,7 @@
 = Grails 3.0.1 Demo for Beginners Workshop
 
-[![Build Status](https://travis-ci.org/JacobAae/eu-gr8conf-grailsdemo.svg?branch=geb-talk&label=Travis Build)](https://travis-ci.org/jacobaae/eu-gr8conf/grailsdemo) 
+image:https://travis-ci.org/JacobAae/eu-gr8conf-grailsdemo.svg?branch=geb-talk&label=Travis Build["Build Status", link="https://travis-ci.org/jacobaae/eu-gr8conf/grailsdemo"]
+
 
 Made for GR8conf EU 2015
 
